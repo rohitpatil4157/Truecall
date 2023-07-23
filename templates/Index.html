@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="Main">
+        <form class="container" action="/" method="POST">
+            <input type="text" name="input_val" id="input_val" placeholder="Type Number...">
+            <button class="button" onclick="submitForm(); return false"><i class="fas fa-circle-notch"></i></button>
+        </form>
+
+
+        <section class="UiContainer"> <!-- Populate JS Data !--> </section>
+    </div>
+
+</body>
+
+<script src="{{ url_for('static', filename='ProfiPic.js') }}"></script>
+
+<script>
+
+    let btn = document.querySelector('.button');
+    let Changecontainer = document.querySelector('.UiContainer')
+
+    function submitForm() {
+        if (isNumber(document.getElementById("input_val").value)) {
+
+            let prathamXHR = new XMLHttpRequest();
+
+            prathamXHR.open('POST', '/', true);
+            prathamXHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            prathamXHR.onload = () => {
+                if (prathamXHR.readyState === XMLHttpRequest.DONE && prathamXHR.status === 200) {
+
+                    let text = JSON.parse(prathamXHR.responseText).data[0];
+                    let avatar = createAvatar(text?.name, 150);
+                    let MyAvatar = avatar.image;
+                    let Mycolor = avatar.AvatarColor;
+                    console.log(text)
+
+                    btn.children[0].classList.add('fa-spin') //loading animation
+
+
+                    let Maniputedhtml = `<div id="Intro">
+                    <div id='profilepic'><img src="${text?.image || MyAvatar}" alt=""></div>
+                    <div id="Numbers">
+                        <p>${text?.internetAddresses[0]?.caption && text?.internetAddresses[0]?.caption.length > text?.name?.length ? text?.internetAddresses[0]?.caption : text?.name || ''}</p>
+                        <p id="small">${text?.phones[0]?.e164Format || document.getElementById("input_val").value}</p>
+                    </div>
+                </div>
+                <hr class=".new1" style="border-color:${Mycolor}">
+
+                <div class="addit">
+                    <a><span class="material-symbols-outlined">wifi_add</span></a>
+                    <p>${text?.phones[0]?.carrier || ''}</p>
+                </div>
+
+                <div class="addit">
+                    <a><span class="material-symbols-outlined">location_on</span></a>
+                    <p>${text?.addresses[0]?.address ? text?.addresses[0]?.address + ',' : text?.addresses[0]?.countryCode ? text.addresses[0].countryCode + ',' : ''} ${text?.addresses[0]?.city || ''}</p>
+                </div>
+
+                <div class="addit">
+                    <a><span class="material-symbols-outlined">alternate_email</span></a>
+                    <p>${text?.internetAddresses[0]?.id || ''}</p>
+                </div>`;
+                    setTimeout(() => {
+                        Changecontainer.innerHTML = Maniputedhtml
+                        btn.children[0].classList.remove('fa-spin')
+                    }, 100)
+
+                }
+            }
+            prathamXHR.send("input_val=" + document.getElementById("input_val").value);
+            document.getElementById("input_val").value = ''
+
+            let lStorage = window.localStorage;
+            let Usagenumber = Number(lStorage.getItem('Index'));
+            lStorage.setItem('Index', Usagenumber + 1);
+            console.log(Usagenumber + 1)
+        }
+
+    }
+
+
+</script>
+
+</html>

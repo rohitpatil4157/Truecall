@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+.Main {
+    position: relative;
+    background-color: rgb(26, 28, 30);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.UiContainer {
+    position: relative;
+    background-color: white;
+    width: 27em;
+    height: 15em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    left: 1px;
+    margin-top: 10px;
+
+}
+
+#Intro {
+    /* position: relative; */
+    /* border: 1px solid rgb(0, 255, 34); */
+    width: auto;
+    /* margin: 15px; */
+    /* margin-top: 10px; */
+    padding: 10px;
+    /* height: 5em; */
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+#profilepic {
+    width: 4em;
+    height: 4em;
+}
+
+#profilepic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+
+}
+
+#Intro #Numbers {
+    margin-left: 25px;
+    font-size: 1.6em;
+
+}
+
+#Intro #Numbers #small {
+    font-size: 0.9rem;
+    letter-spacing: 0.1px;
+}
+
+.additional {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgb(206, 14, 14);
+}
+
+
+.addit {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin: 4px 0;
+
+}
+
+.addit a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 10px 20px;
+}
+
+.container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 27em;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.container input {
+    padding: 10px;
+    width: 85%;
+    height: 100%;
+    outline: none;
+    border: none;
+    font-size: 18px;
+}
+
+.container span,
+.container button {
+    padding: 10px 20px;
+    background-color: rgb(10, 10, 58);
+    border-radius: 3px;
+    color: white;
+    margin-left: 4px;
+    user-select: none;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+.new1 {
+    border: 0.5px solid rgba(0, 0, 0, 0)
+}
